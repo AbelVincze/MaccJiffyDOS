@@ -4,6 +4,8 @@ JiffyDOS 6.01 for the Commodore 64 with **MaccPatch v0.9b** applied.
 
 This repository does **not** include any JiffyDOS ROM images. You must supply your own legally obtained **JiffyDOS 6.01 KERNAL ROM** and apply the patch.
 
+![MaccJiffyDOS startup screen](images/maccpatch_v0.9b_img01_startup.png)
+
 ## Quick start
 
 Patch your JiffyDOS 6.01 ROM (verified by MD5) and produce a patched ROM:
