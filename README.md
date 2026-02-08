@@ -1,2 +1,118 @@
 # MaccJiffyDOS
-MaccPatch for C64 JiffyDOS 6.01
+
+JiffyDOS 6.01 for the Commodore 64 with **MaccPatch v0.9b** applied.
+
+This repository does **not** include any JiffyDOS ROM images. You must supply your own legally obtained **JiffyDOS 6.01 KERNAL ROM** and apply the patch.
+
+## Quick start
+
+Patch your JiffyDOS 6.01 ROM (verified by MD5) and produce a patched ROM:
+
+```bash
+python3 version0.9B/apply_patch.py jiffydos601.rom version0.9B/maccpatch_v0.9b.bin maccjiffy.rom
+```
+
+- The script verifies the MD5 of the input ROM and patch data.
+- The output ROM is also MD5-checked.
+- The resulting ROM will have a proper `$E0` checksum.
+
+You can then burn an EPROM with `maccjiffy.rom`, or use it as a ROM file in an emulator.
+
+## What this patch changes
+
+### Removed features/code
+
+- KERNAL RS232 code and leftover tape-handling code
+- JiffyDOS file copy feature and related code
+- JiffyDOS printing features
+
+### Fixes and improvements
+
+- Fixes JiffyDOS `?@` issues
+- REU non-destructive REU/size detection at boot
+- No memory test at boot
+- Removes a memory corruption issue at `$FD27`
+- “Nice Restart” (screen off, black, VBL)
+- Safe free RAM calculation with cartridge-disabler restart (similar to KKF2)
+- Default character color: white
+- Default key repeat speed increased by ~25%
+
+### Compatibility note
+
+All JiffyDOS features not mentioned above should still work.
+
+## New function key definitions
+
+| Key | Sends         | Description                                                |
+| --- | ------------- | ---------------------------------------------------------- |
+| F1  | `@$:*` + CR   | Directory + ENTER                                          |
+| F2  | `@$=P` + CR   | Directory partitions + ENTER                               |
+| F3  | `@ "CD:` + CR | Change into directory + ENTER (cursor on a directory line) |
+| F4  | `@CD_` + CR   | Change to parent directory + ENTER                         |
+| F5  | `^` + CR      | `,DN` load BASIC/run + ENTER (cursor on a directory line)  |
+| F6  | `%` + CR      | `,DN,1` load data + ENTER (cursor on a directory line)     |
+| F7  | `_2:*` + CR   | Load & run `2:*` + ENTER                                   |
+| F8  | `@  "S:`      | Delete file (cursor on a file line)                        |
+
+## BASIC extensions
+
+### Safe hexadecimal/binary/octal numbers
+
+These are BASIC-safe numeric formats:
+
+- Hex: `$89ABCD`
+- Binary: `%10101110`
+- Octal: `&4567`
+
+### Convenience
+
+- Typing `$` on its own loads the directory
+- Shows hexadecimal start/end addresses during Load/Save/Verify
+- RAM-safe Load/Save/Verify for JiffyDOS IEC devices
+- Run/Stop + Restore: breaks at `$xxxx` and displays the interrupted code PC
+
+## Memory commands
+
+Most of these use the REU. All new memory commands:
+
+- Start with `.`
+- Use hexadecimal numbers
+- Allow optional whitespace (except where noted)
+
+### Viewing
+
+- `.G` — Memory view in HiRes graphic mode (C64 memory not modified). First copies all C64 RAM to the REU, then flips through pages. Use CRSR LEFT/RIGHT for next/previous, exit with STOP. Uses the current background/character colors.
+- `.RG` — REU-safe view (shows REU content only; REU memory not modified).
+
+### Load/Save and editing
+
+```text
+.L "FN" 1000            Load FN from active device to base address
+.S "FN" 1000 2000       Save memory region (end address is exclusive)
+.M 1000                 Hexdump from address; continues until STOP
+.F 1000 0100 AA          Fill C64 memory (start, length, byte)
+.RF 0F0000 0200 AA        Fill REU memory
+.T 1000 0100 2000         Transfer C64 memory (uses REU as buffer)
+.RT 0F0000 0100 1000      Transfer REU -> C64
+.RT 1000*0100 0F0000      Transfer C64 -> REU (* requires a space)
+```
+
+## Requirements
+
+- Python 3
+- A JiffyDOS 6.01 C64 KERNAL ROM image matching the expected MD5
+
+## MD5 checksums
+
+The patch script enforces these checksums:
+
+- JiffyDOS 6.01 input ROM: `be09394f0576cf81fa8bacf634daf9a2`
+- Patch data `maccpatch_v0.9b.bin`: `1c76120a56d45648adbe819473d571be`
+- Patched output ROM: `a0b33a60e38b6795682319a520b039d9`
+
+If your ROM image differs (different dump/version/format), the patch will intentionally refuse to apply.
+
+## Notes
+
+- The patch leaves “a total of 14 unused bytes in 5 locations”.
+- This project is intended for personal use with legally obtained ROMs.
