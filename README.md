@@ -118,6 +118,7 @@ If your ROM image differs (different dump/version/format), the patch will intent
 
 - The patch leaves “a total of 14 unused bytes in 5 locations”.
 - This project is intended for personal use with legally obtained ROMs.
+- A few things remaining (future update maybe) like full RAM load for non Jiffy devices, relocate $9F00 buffer, to keep most of the RAM intact after restart.
 
 ## Files to download (included in this repo)
 
