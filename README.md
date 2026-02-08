@@ -93,16 +93,16 @@ Most of these use the REU. All new memory commands:
 - `.RG` — REU-safe view (shows REU content only; REU memory not modified; C64 memory modified $2000-$4000).
 - `.M 1000` - Hexdump from address; continues until STOP
 
-### Load/Save and dumping
+### Load/Save and managing memory
 
 ```text
 .L "FN" 1000            Load FN from active device to base address
 .S "FN" 1000 2000       Save memory region (end address is exclusive)
-.F 1000 0100 AA          Fill C64 memory (start, length, byte)
-.RF 0F0000 0200 AA        Fill REU memory
-.T 1000 0100 2000         Transfer C64 memory (uses REU as buffer)
-.RT 0F0000 0100 1000      Transfer REU -> C64
-.RT 1000*0100 0F0000      Transfer C64 -> REU (* requires a space)
+.F 1000 0100 AA         Fill C64 memory (start, length, byte)
+.RF 0F0000 0200 AA      Fill REU memory
+.T 1000 0100 2000       Transfer C64 memory (uses REU as buffer)
+.RT 0F0000 0100 1000    Transfer REU -> C64
+.RT 1000*0100 0F0000    Transfer C64 -> REU (* mandatory space)
 ```
 
 ## Requirements
