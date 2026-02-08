@@ -96,11 +96,11 @@ Most of these use the REU. All new memory commands:
 ### Load/Save and managing memory
 
 ```text
-.L "FN" 1000            Load FN from active device to base address
-.S "FN" 1000 2000       Save memory region (end address is exclusive)
-.F 1000 0100 AA         Fill C64 memory (start, length, byte)
-.RF 0F0000 0200 AA      Fill REU memory
-.T 1000 0100 2000       Transfer C64 memory (uses REU as buffer)
+.L "FN" 1000            Load FN from active device to base address (start)
+.S "FN" 1000 2000       Save memory region (start, end - end address is exclusive)
+.F 1000 0100 AA         Fill C64 memory (start, length, fillbyte)
+.RF 0F0000 0200 AA      Fill REU memory (start, length, fillbyte)
+.T 1000 0100 2000       Transfer C64 memory (source, length, target - uses REU as buffer)
 .RT 0F0000 0100 1000    Transfer REU -> C64
 .RT 1000*0100 0F0000    Transfer C64 -> REU (* mandatory space)
 ```
