@@ -60,11 +60,17 @@ All JiffyDOS features not mentioned above should still work.
 
 ### Basic-safe hexadecimal/binary/octal numbers
 
-BASIC-safe implementation of hexadecimal, binary and octal number system habdling::
+BASIC-safe implementation of hexadecimal, binary and octal number system handling::
 
 - Hex: `$89ABCD`
 - Binary: `%10101110`
 - Octal: `&4567`
+
+Examples:
+
+`?$FFFF`
+`POKE $D020,$C`
+`10 FOR I=$400 To $6E8: POKE I,%00100000: NEXT`
 
 ### Convenience
 
