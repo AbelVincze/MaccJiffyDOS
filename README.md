@@ -35,9 +35,9 @@ You can then burn an EPROM with `maccjiffy.rom`, or use it as a ROM file in an e
 - No memory test at boot
 - Removes a memory corruption issue at `$FD27`
 - “Nice Restart” (screen off, black, VBL)
-- Safe free RAM calculation with cartridge-disabler restart (similar to KKF2)
+- Safe free RAM calculation with cartridge-disabler reset circuit (like in KKF2)
 - Default character color: white
-- Default key repeat speed increased by ~25%
+- Default key repeat speed increased by 25%
 
 ### Compatibility note
 
@@ -58,9 +58,9 @@ All JiffyDOS features not mentioned above should still work.
 
 ## BASIC extensions
 
-### Safe hexadecimal/binary/octal numbers
+### Basic-safe hexadecimal/binary/octal numbers
 
-These are BASIC-safe numeric formats:
+BASIC-safe implementation of hexadecimal, binary and octal number system habdling::
 
 - Hex: `$89ABCD`
 - Binary: `%10101110`
@@ -71,27 +71,27 @@ These are BASIC-safe numeric formats:
 - Typing `$` on its own loads the directory
 - Shows hexadecimal start/end addresses during Load/Save/Verify
 - RAM-safe Load/Save/Verify for JiffyDOS IEC devices
-- Run/Stop + Restore: breaks at `$xxxx` and displays the interrupted code PC
+- Run/Stop + Restore: displays the interrupted code PC: `breaks at $89AB` 
 
 ## Memory commands
 
 Most of these use the REU. All new memory commands:
 
 - Start with `.`
-- Use hexadecimal numbers
-- Allow optional whitespace (except where noted)
+- Use hexadecimal arguments and outputs (if any)
+- Whitespaces are optional (except where noted)
 
 ### Viewing
 
-- `.G` — Memory view in HiRes graphic mode (C64 memory not modified). First copies all C64 RAM to the REU, then flips through pages. Use CRSR LEFT/RIGHT for next/previous, exit with STOP. Uses the current background/character colors.
-- `.RG` — REU-safe view (shows REU content only; REU memory not modified).
+- `.G` — Memory view in HiRes graphic mode (C64 memory restored at exit, REU memory's full first bank used as buffer). First copies all C64 RAM to the REU, then flips through pages. Use CRSR LEFT/RIGHT for next/previous, exit with STOP. Uses the current background/character colors.
+- `.RG` — REU-safe view (shows REU content only; REU memory not modified; C64 memory modified $2000-$4000).
+- `.M 1000` - Hexdump from address; continues until STOP
 
-### Load/Save and editing
+### Load/Save and dumping
 
 ```text
 .L "FN" 1000            Load FN from active device to base address
 .S "FN" 1000 2000       Save memory region (end address is exclusive)
-.M 1000                 Hexdump from address; continues until STOP
 .F 1000 0100 AA          Fill C64 memory (start, length, byte)
 .RF 0F0000 0200 AA        Fill REU memory
 .T 1000 0100 2000         Transfer C64 memory (uses REU as buffer)
