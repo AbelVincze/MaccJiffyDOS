@@ -70,7 +70,7 @@ BASIC-safe implementation of hexadecimal, binary and octal number system habdlin
 
 - Typing `$` on its own loads the directory
 - Shows hexadecimal start/end addresses during Load/Save/Verify
-- RAM-safe Load/Save/Verify for JiffyDOS IEC devices
+- FUll RAM Load/Save/Verify for JiffyDOS IEC devices
 - Run/Stop + Restore: displays the interrupted code PC: `breaks at $89AB` 
 
 ## Memory commands
