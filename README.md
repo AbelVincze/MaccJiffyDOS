@@ -1,6 +1,6 @@
 # MaccJiffyDOS
 
-JiffyDOS 6.01 for the Commodore 64 with **MaccPatch v0.9b** applied.
+**MaccPatch v0.9b** applied to JiffyDOS 6.01 for the Commodore 64.
 
 This repository does **not** include any JiffyDOS ROM images. You must supply your own legally obtained **JiffyDOS 6.01 KERNAL ROM** and apply the patch.
 
@@ -16,7 +16,7 @@ python3 version0.9B/apply_patch.py jiffydos601.rom version0.9B/maccpatch_v0.9b.b
 
 - The script verifies the MD5 of the input ROM and patch data.
 - The output ROM is also MD5-checked.
-- The resulting ROM will have a proper `$E0` checksum.
+- The resulting ROM will have a proper `$E0` checksum. (Checksum calculation here: https://github.com/mist64/c64rom/tree/master)
 
 You can then burn an EPROM with `maccjiffy.rom`, or use it as a ROM file in an emulator.
 
