@@ -72,6 +72,8 @@ Examples:
 `POKE $D020,$C`
 `10 FOR I=$400 TO $6E8: POKE I,%100000: NEXT`
 
+![MaccJiffyDOS number systems](images/maccpatch_v0.9b_img02_hexbin.png)
+
 ### Convenience
 
 - Typing `$` on its own loads the directory
