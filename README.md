@@ -81,6 +81,8 @@ Examples:
 - FUll RAM Load/Save/Verify for JiffyDOS IEC devices
 - Run/Stop + Restore: displays the interrupted code PC: `break at $89AB`
 
+![MaccJiffyDOS I/O addresses](images/maccpatch_v0.9b_img03_breakloadsave.png)
+
 ## Memory commands
 
 Most of these use the REU. All new memory commands:
@@ -94,6 +96,8 @@ Most of these use the REU. All new memory commands:
 - `.G` — Memory view in HiRes graphic mode (C64 memory restored at exit, REU memory's full first bank used as buffer). First copies all C64 RAM to the REU, then flips through pages. Use CRSR LEFT/RIGHT for next/previous, exit with STOP. Uses the current background/character colors. With this command, you make a quick snapshot of the whole C64 RAM area, as a side effect.
 - `.RG` — REU-safe view (shows REU content only; REU memory not modified; C64 memory modified $2000-$4000).
 - `.M 1000` - Hexdump from address; continues until STOP
+
+![MaccJiffyDOS Graphic view](images/maccpatch_v0.9b_img04_g_cmd.png)
 
 ### Load/Save and managing memory
 
