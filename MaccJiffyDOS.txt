@@ -1,0 +1,66 @@
+MaccJiffy - JiffyDOS 6.01 with MaccPatch v0.9b applied
+
+
+- Removed kernal RS232 and leftover TAPE handling codes
+- Removed JiffyDOS file copy and related codes
+- Removed JiffyDOS printing features
+
+- fixed JiffyDOS ?@ issues
+- All the not mentionned JiffyDOS features still works.
+
+- New FKEY definitions:
+	F1: '@$:*'<CR>   DIR + ENTER
+	F3: '@ "CD:'<CR> CD DIR + ENTER (With cursor on dir line)
+	F5: '^'<CR>      ,DN   LOAD BASIC/RUN + ENTER (With cursor on dir line)
+	F7: '_2:*'<CR>   LOAD&RUN 2:* + ENTER 
+ 	F2: '@$=P'<CR>   DIR PARTITIONS + ENTER
+	F4: '@CD_'<CR> 	 CD up + ENTER
+	F6: '%'<CR>      ,DN,1 LOAD DATA + ENTER (With cursor on dir line)
+	F8: '@  "S:'     DELETE FILE (With cursor on dir line)
+
+- REU non destructive REU/size detection at boot time
+- No memory test at boot
+- Remove memory corruption at FD27
+- Nice Restart (screen off, black, VBL)
+- Safe Free RAM calcualtion with cartridge disabler restart (like KKF2)
+- Default White character color
+- Default key repeat speed increased by 25%
+
+- BASIC safe Hexadecimal/Binary/Octal number system support
+	$89ABCD
+	%10101110
+	&4567
+
+- Display hex start-end addresses at Load/Save/Verify
+- RAM safe Load/Save/Verify for JiffyDOS IEC devices
+- $ typed alone loads dir
+
+- run/stop restore -> Break At $xxxx displays interrupted code PC
+
+- New set of "Memory" commands. Most of them uses REU. All new memory commands
+  starts with ".", uses hexadecimal number. White spaces are optional (expect *):
+
+  	.G 					Memory view in HiRes graphic mode (C64 memory not modified)
+  						first copy all C64 RAM to REU, then flip through all pages
+  						Use CRSR LEFT/RIGHT (next/prev) and exit with STOP key
+  						(uses actual background/character colors)
+  	.RG 				REU safe, only shows REU content. (REU memory not modified)
+
+  	.L "FN" 1000    	Load FN from active device at given base address
+  	.S "FN" 1000 2000	Save memory given region (end address exclusive)
+  	.M 1000 			display RAM hexdump from given address, lists until STOP
+  	.F 1000 0100 AA 	Fill C64 memory, from given start address, length, and fill byte
+  	.RF 0F0000 0200 AA 	Fill REU memory
+  	.T 1000 0100 2000 	Transfer C64 memory, from given start address,
+  						length, and target address. (REU used as buffer)
+  	.RT 0F0000 0100 1000 	Transfer REU memory to C64
+  	.RT 1000*0100 0F0000 	Transfer C64 memory to REU (* mandatory space!)
+
+
+Patching JiffyDOS 6.01 ROM file (MD5: be09394f0576cf81fa8bacf634daf9a2):
+#python3 apply_patch.py jiffydos601.rom maccpatch.bin maccjiffy.rom
+
+(The resulting ROM file will have proper $E0 checksum)
+You can then burn EPROM with maccjiffy.rom, or load it as ROM file in emulators.
+
+(a total of 14 unused bytes in 5 locations)
