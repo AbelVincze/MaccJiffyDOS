@@ -71,7 +71,7 @@ BASIC-safe implementation of hexadecimal, binary and octal number system habdlin
 - Typing `$` on its own loads the directory
 - Shows hexadecimal start/end addresses during Load/Save/Verify
 - FUll RAM Load/Save/Verify for JiffyDOS IEC devices
-- Run/Stop + Restore: displays the interrupted code PC: `breaks at $89AB` 
+- Run/Stop + Restore: displays the interrupted code PC: `break at $89AB`
 
 ## Memory commands
 
@@ -118,3 +118,10 @@ If your ROM image differs (different dump/version/format), the patch will intent
 
 - The patch leaves “a total of 14 unused bytes in 5 locations”.
 - This project is intended for personal use with legally obtained ROMs.
+
+## Files to download (included in this repo)
+
+These two files are the only things you need from _this_ repository to patch your own JiffyDOS 6.01 ROM:
+
+- [version0.9B/apply_patch.py](version0.9B/apply_patch.py) — Python 3 patcher that verifies MD5 checksums and produces the patched ROM.
+- [version0.9B/maccpatch_v0.9b.bin](version0.9B/maccpatch_v0.9b.bin) — The MaccPatch v0.9b binary diff data applied to the JiffyDOS 6.01 ROM.
