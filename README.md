@@ -70,7 +70,7 @@ Examples:
 
 `?$FFFF`
 `POKE $D020,$C`
-`10 FOR I=$400 To $6E8: POKE I,%00100000: NEXT`
+`10 FOR I=$400 TO $6E8: POKE I,%100000: NEXT`
 
 ### Convenience
 
